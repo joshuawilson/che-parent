@@ -89,7 +89,7 @@
             <jacoco.outputDir>${session.executionRootDirectory}/target/</jacoco.outputDir>
     -->
         <jacoco.outputDir>${project.build.directory}</jacoco.outputDir>
-        <jdk.min.version>${maven.compiler.source}</jdk.min.version>
+        <jdk.min.version>1.8</jdk.min.version>
         <!-- **************************************** -->
         <!-- Jenkins Settings                         -->
         <!-- **************************************** -->
