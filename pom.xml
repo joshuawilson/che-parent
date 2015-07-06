@@ -232,7 +232,7 @@
         <version.karaf.plugin>3.0.1</version.karaf.plugin>
         <version.lesscss.plugin>1.7.0.1.1</version.lesscss.plugin>
         <!-- PAR-92 : Bundle used to manage file headers -->
-        <version.license-bundle>4</version.license-bundle>
+        <version.license-bundle>${version.resource-bundle}</version.license-bundle>
         <version.license-header>codenvy-eclipse-license-resource-bundle</version.license-header>
         <version.license.plugin>1.8</version.license.plugin>
         <version.mycila-license.plugin>2.10</version.mycila-license.plugin>
@@ -247,6 +247,7 @@
         <version.release.plugin>2.5.1</version.release.plugin>
         <version.remote-resources.plugin.version>1.5</version.remote-resources.plugin.version>
         <version.replacer.plugin>1.5.3</version.replacer.plugin>
+        <version.resource-bundle>6-SNAPSHOT</version.resource-bundle>
         <version.resources.plugin>2.7</version.resources.plugin>
         <version.selenium.plugin>2.3</version.selenium.plugin>
         <version.shade.plugin>2.3</version.shade.plugin>
@@ -616,6 +617,8 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>${version.javadoc.plugin}</version>
                     <configuration>
+                        <!-- Workaround for java 8 strict javadoc compiler TODO fix me -->
+                        <additionalparam>-Xdoclint:none</additionalparam>
                         <archive>
                             <manifest>
                                 <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
