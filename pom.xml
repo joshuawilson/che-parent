@@ -206,7 +206,7 @@
         <version.exobuild.plugin>1.2.2</version.exobuild.plugin>
         <version.exopc.plugin>1.0.5</version.exopc.plugin>
         <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
-        <version.findbugs.plugin>3.0.0</version.findbugs.plugin>
+        <version.findbugs.plugin>3.0.1</version.findbugs.plugin>
         <version.gmaven.plugin>1.5</version.gmaven.plugin>
         <version.gmavenplus.plugin>1.2</version.gmavenplus.plugin>
         <version.gpg.plugin>1.6</version.gpg.plugin>
@@ -385,6 +385,25 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${version.compiler.plugin}</version>
+                    <!--dependencies>
+                        <dependency>
+                            <groupId>com.google.errorprone</groupId>
+                            <artifactId>error_prone_core</artifactId>
+                            <version>2.0.4</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.codehaus.plexus</groupId>
+                            <artifactId>plexus-compiler-javac-errorprone</artifactId>
+                            <version>2.5</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <compilerArgs>
+                            <arg>-Xep:DepAnn:WARN</arg>
+                        </compilerArgs>
+                        <compilerId>javac-with-errorprone</compilerId>
+                        <forceJavacCompilerUse>true</forceJavacCompilerUse>
+                    </configuration-->
                 </plugin>
                 <plugin>
                     <groupId>com.github.goldin</groupId>
@@ -1393,6 +1412,25 @@
             </activation>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>findbugs-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <maxHeap>1024</maxHeap>
+                            <effort>Max</effort>
+                            <threshold>Low</threshold>
+                            <xmlOutput>true</xmlOutput>
+                            <failOnError>false</failOnError>
+                            <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
+                        </configuration>
+                    </plugin>
                     <plugin>
                         <groupId>com.google.code.sortpom</groupId>
                         <artifactId>maven-sortpom-plugin</artifactId>
