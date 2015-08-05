@@ -385,7 +385,9 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${version.compiler.plugin}</version>
-                    <!--dependencies>
+                    <dependencies>
+                        <!-- override plexus-compiler-javac-errorprone's dependency on
+                             Error Prone with the latest version -->
                         <dependency>
                             <groupId>com.google.errorprone</groupId>
                             <artifactId>error_prone_core</artifactId>
@@ -403,7 +405,7 @@
                         </compilerArgs>
                         <compilerId>javac-with-errorprone</compilerId>
                         <forceJavacCompilerUse>true</forceJavacCompilerUse>
-                    </configuration-->
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>com.github.goldin</groupId>
