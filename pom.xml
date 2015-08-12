@@ -76,6 +76,8 @@
         <downloadSources>true</downloadSources>
         <!-- Extra enforcer rules -->
         <extra-enforcer-rules.version>1.0-beta-2</extra-enforcer-rules.version>
+        <findbugs.excludeFilterFiler></findbugs.excludeFilterFiler>
+        <findbugs.failonerror>false</findbugs.failonerror>
         <!-- gmaven-plugin -->
         <gmaven-plugin.providerSelection>2.0</gmaven-plugin.providerSelection>
         <!-- maven-gpg-plugin -->
@@ -108,9 +110,9 @@
         <maven.compiler.optimize>true</maven.compiler.optimize>
         <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
         <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.source>1.8</maven.compiler.source>
         <!-- maven-compiler-plugin -->
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <!-- maven-enforcer-plugin -->
         <maven.min.version>3.1.1</maven.min.version>
         <maven.private.repo.url>https://maven.codenvycorp.com/content/groups/codenvy-public-group/</maven.private.repo.url>
@@ -247,7 +249,7 @@
         <version.release.plugin>2.5.1</version.release.plugin>
         <version.remote-resources.plugin.version>1.5</version.remote-resources.plugin.version>
         <version.replacer.plugin>1.5.3</version.replacer.plugin>
-        <version.resource-bundle>7</version.resource-bundle>
+        <version.resource-bundle>9</version.resource-bundle>
         <version.resources.plugin>2.7</version.resources.plugin>
         <version.selenium.plugin>2.3</version.selenium.plugin>
         <version.shade.plugin>2.3</version.shade.plugin>
@@ -1429,7 +1431,8 @@
                             <effort>Max</effort>
                             <threshold>Low</threshold>
                             <xmlOutput>true</xmlOutput>
-                            <failOnError>false</failOnError>
+                            <failOnError>${findbugs.failonerror}</failOnError>
+                            <excludeFilterFile>${findbugs.excludeFilterFiler}</excludeFilterFile>
                             <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
                         </configuration>
                     </plugin>
