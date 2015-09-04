@@ -76,7 +76,7 @@
         <downloadSources>true</downloadSources>
         <!-- Extra enforcer rules -->
         <extra-enforcer-rules.version>1.0-beta-2</extra-enforcer-rules.version>
-        <findbugs.excludeFilterFiler />
+        <findbugs.excludeFilterFile/>
         <findbugs.failonerror>false</findbugs.failonerror>
         <!-- gmaven-plugin -->
         <gmaven-plugin.providerSelection>2.0</gmaven-plugin.providerSelection>
@@ -1434,7 +1434,7 @@
                             <threshold>Low</threshold>
                             <xmlOutput>true</xmlOutput>
                             <failOnError>${findbugs.failonerror}</failOnError>
-                            <excludeFilterFile>${findbugs.excludeFilterFiler}</excludeFilterFile>
+                            <excludeFilterFile>${findbugs.excludeFilterFile}</excludeFilterFile>
                             <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
                         </configuration>
                     </plugin>
