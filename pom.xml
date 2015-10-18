@@ -15,7 +15,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.eclipse.che.parent</groupId>
     <artifactId>maven-parent-pom</artifactId>
-    <version>3.7.9-SNAPSHOT</version>
+    <version>3.7.10-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Che parent POM</name>
     <description>Provides default project configuration for Che projects</description>
@@ -76,7 +76,7 @@
         <downloadSources>true</downloadSources>
         <!-- Extra enforcer rules -->
         <extra-enforcer-rules.version>1.0-beta-2</extra-enforcer-rules.version>
-        <findbugs.excludeFilterFile/>
+        <findbugs.excludeFilterFile />
         <findbugs.failonerror>false</findbugs.failonerror>
         <!-- gmaven-plugin -->
         <gmaven-plugin.providerSelection>2.0</gmaven-plugin.providerSelection>
@@ -249,7 +249,7 @@
         <version.release.plugin>2.5.1</version.release.plugin>
         <version.remote-resources.plugin.version>1.5</version.remote-resources.plugin.version>
         <version.replacer.plugin>1.5.3</version.replacer.plugin>
-        <version.resource-bundle>10</version.resource-bundle>
+        <version.resource-bundle>12</version.resource-bundle>
         <version.resources.plugin>2.7</version.resources.plugin>
         <version.selenium.plugin>2.3</version.selenium.plugin>
         <version.shade.plugin>2.3</version.shade.plugin>
@@ -513,6 +513,11 @@
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>${version.enforcer.plugin}</version>
                     <dependencies>
+                        <dependency>
+                            <groupId>com.ceilfors.maven.plugin</groupId>
+                            <artifactId>enforcer-rules</artifactId>
+                            <version>1.2.0</version>
+                        </dependency>
                         <dependency>
                             <groupId>org.codehaus.mojo</groupId>
                             <artifactId>animal-sniffer-enforcer-rule</artifactId>
@@ -1207,22 +1212,38 @@
                                     </rules>
                                 </configuration>
                             </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>dependency-convergence</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-enforcer-plugin</artifactId>
-                        <executions>
+                            <execution>
+                                <id>distribution-management-used</id>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <rules>
+                                        <requireDepMgt>
+                                            <message>You are trying to use artifacts that are not in the list of allowed artifacts included in dependencyManagement in maven-depmgt-pom or have different version.</message>
+                                            <checkVersion>true</checkVersion>
+                                            <ignoreScopes>
+                                                <ignoreScope>runtime</ignoreScope>
+                                            </ignoreScopes>
+                                        </requireDepMgt>
+                                    </rules>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>no-distribution-management-at-all</id>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <rules>
+                                        <banDistributionManagement>
+                                            <allowRepository>true</allowRepository>
+                                            <allowSnapshotRepository>true</allowSnapshotRepository>
+                                            <allowSite>true</allowSite>
+                                        </banDistributionManagement>
+                                    </rules>
+                                </configuration>
+                            </execution>
                             <execution>
                                 <id>dependency</id>
                                 <phase>validate</phase>
@@ -1233,6 +1254,59 @@
                                     <rules>
                                         <DependencyConvergence />
                                     </rules>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ban-bad-dependencies</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <rules>
+                                        <bannedDependencies>
+                                            <searchTransitive>true</searchTransitive>
+                                            <excludes>
+                                                <exclude>commons-logging:commons-logging-api</exclude>
+                                                <exclude>concurrent:concurrent</exclude>
+                                                <exclude>com.google.code.findbugs:*</exclude>
+                                                <exclude>javax.annotation:jsr250-api</exclude>
+                                                <exclude>javax.servlet:servlet-api</exclude>
+                                                <exclude>javax.xml:jaxrpc-api</exclude>
+                                                <exclude>javax.xml.soap:saaj-api</exclude>
+                                                <exclude>javax.xml.stream:stax-api</exclude>
+                                                <exclude>jboss:jboss-logging-spi</exclude>
+                                                <exclude>org.apache.xalan:serializer</exclude>
+                                                <exclude>org.apache.xalan:xalan</exclude>
+                                                <exclude>org.slf4j:slf4j-nop</exclude>
+                                                <exclude>org.slf4j:slf4j-jdk14</exclude>
+                                                <exclude>org.slf4j:slf4j-log4j12</exclude>
+                                                <exclude>org.slf4j:slf4j-log4j13</exclude>
+                                                <exclude>stax:stax-api</exclude>
+                                                <exclude>sun-jaxb:jaxb-api</exclude>
+                                                <exclude>trove:trove</exclude>
+                                                <exclude>woodstox:wstx-lgpl</exclude>
+                                                <exclude>xml-apis:xml-apis</exclude>
+                                            </excludes>
+                                        </bannedDependencies>
+                                    </rules>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>analyze</id>
+                                <goals>
+                                    <goal>analyze-only</goal>
+                                </goals>
+                                <configuration>
+                                    <failOnWarning>true</failOnWarning>
+                                    <ignoreNonCompile>true</ignoreNonCompile>
+                                    <outputXML>true</outputXML>
                                 </configuration>
                             </execution>
                         </executions>
