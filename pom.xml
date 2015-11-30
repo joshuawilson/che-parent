@@ -840,8 +840,6 @@
                             <exclude>**/*.svg</exclude>
                             <exclude>**/README</exclude>
                             <exclude>**/server.xml</exclude>
-                            <exclude>**/setenv.sh</exclude>
-                            <exclude>**/setenv.bat</exclude>
                             <exclude>**/*.json</exclude>
                             <exclude>**/catalina.properties</exclude>
                             <exclude>**/logging.properties</exclude>
