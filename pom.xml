@@ -36,7 +36,7 @@
         <maven>${maven.min.version}</maven>
     </prerequisites>
     <scm>
-        <connection>scm:git:git://github.com/codenvy/che-parent.git</connection>
+        <connection>scm:git:git@github.com:codenvy/che-parent.git</connection>
         <developerConnection>scm:git:git@github.com:codenvy/che-parent.git</developerConnection>
         <tag>HEAD</tag>
         <url>https://fisheye.codenvy.com/browse/maven-parent-pom</url>
