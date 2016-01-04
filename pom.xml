@@ -847,6 +847,7 @@
                             <exclude>**/jmxremote.access</exclude>
                             <exclude>**/jmxremote.password</exclude>
                             <exclude>**/tomcat-users.xml</exclude>
+                            <exclude>**/rewrite.config</exclude>
                         </excludes>
                         <headerDefinitions>
                             <headerDefinition>javadoc.xml</headerDefinition>
