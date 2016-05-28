@@ -1,19 +1,5 @@
-[![License](https://img.shields.io/github/license/codenvy/che.svg)](https://github.com/codenvy/che-parent)
-[![Latest tag](https://img.shields.io/github/tag/codenvy/che-parent.svg)](https://github.com/codenvy/che-parent/tags)
-
 ## About Eclipse Che
-High performance, open source developer environments in the cloud.
-
-* **che**:                     [Main assembly repo - start here] (https://github.com/codenvy/che)
-* **che-core**:                [Platform APIs and commons libraries] (http://github.com/codenvy/che-core)
-* **che-plugins**:             [Language & tooling extensions] (http://github.com/codenvy/che-plugins)
-* **che-depmgt**:              [Maven dependency management POM] (http://github.com/codenvy/che-depmgt)
-* **che-parent**:              [Maven parent POM] (http://github.com/codenvy/che-parent)
-* **cli**:                     [CLI for interacting with Che remotely] (http://github.com/codenvy/cli)
-* **eclipse-plugin**:          [Eclipse IDE plug-in for Che projects] (http://github.com/codenvy/eclipse-plugin)
+Eclipse Che is a next generation Eclipse IDE and open source alternative to IntelliJ. This repository is licensed under the Eclipse Public License 1.0. Visit [Eclipse Che's Web site](http://eclipse.org/che) for feature information or the main [Che assembly repository](http://github.com/codenvy/che) for a description of all participating repositories.
 
 ## About This Module
-This is the maven root parent POM for Che. 
-
-## License
-Che is open sourced under the Eclipse Public License 1.0.
+This is the maven root parent POM for Che.
